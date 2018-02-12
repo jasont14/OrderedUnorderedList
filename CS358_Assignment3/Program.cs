@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CS358_Assignment3
+namespace OrderUnorderList
 {
     class Program
     {

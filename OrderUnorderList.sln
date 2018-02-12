@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS358_Assignment3", "CS358_Assignment3\CS358_Assignment3.csproj", "{DB045AE8-EFC1-4E13-8DB5-0E43282E6B37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderUnorderList", "CS358_Assignment3\OrderUnorderList.csproj", "{DB045AE8-EFC1-4E13-8DB5-0E43282E6B37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
