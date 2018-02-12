@@ -125,7 +125,7 @@ namespace OrderUnorderList
         {
             char result = 'q';
             string test = "RemoveAll() Test";
-            string testDescription = "This test randomly selects a number from the list and calls RemoveAll(). The method will remove all occurences of the selected number by replacing the number with the last number and shortening the list by 1 for each replacement.";
+            string testDescription = "This test randomly selects a number from the list and calls RemoveAll(). The method will remove all occurences of the selected number by replacing the number with the last number and then shortening the list by 1.";
             
             UnorderedArrayList list = new UnorderedArrayList();
             list.InsertValues(initializeList());

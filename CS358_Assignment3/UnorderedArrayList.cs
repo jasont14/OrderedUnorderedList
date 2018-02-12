@@ -54,16 +54,6 @@ namespace OrderUnorderList
         
         }
 
-        public int GetLength()
-        {
-            return next;
-        }
-
-        public int GetValueAtLocation(int item)
-        {
-            return list[item];
-        }
-               
         public int[] RemoveAll(int selectedItem)
         {
             bool cont = true;
@@ -74,35 +64,15 @@ namespace OrderUnorderList
                 list[item] = list[next - 1]; //Replace item with last item
                 list[next - 1] = 0;    //Remove last item                    
                 removeList.Add(item);
-                next--;             
+                next--;
 
-                if(Array.IndexOf(list,selectedItem) == -1)
+                if (Array.IndexOf(list, selectedItem) == -1)
                 {
                     cont = false;
                 }
             }
 
             return removeList.ToArray();
-        }
-
-        public int GetFirstPositionOfValue(int item)
-        {
-            int result = Array.IndexOf(list, item);
-            
-            return result;
-
-        }
-
-        public void TrimList()
-        {
-            int[] trimmedList = new int[next];
-
-            for (int i=0; i<next; i++)
-            {
-                trimmedList[i] = list[i];
-            }
-
-            list = trimmedList;
         }
 
         public void sort()
@@ -130,29 +100,16 @@ namespace OrderUnorderList
             int[] myArray = list;
 
             int j = sortPosition;
-            int curMin = myArray[sortPosition];
+            int curMin = myArray[sortPosition];  // set current min value to item value at position
 
-            while (j > 0 && myArray[j - 1] > curMin)
+            while (j > 0 && myArray[j - 1] > curMin) //while there is still something to the left to compare it to and the value of the item to the left is greater 
             {
-                myArray[j] = myArray[j - 1];
+                myArray[j] = myArray[j - 1]; //move item left..
                 j--;
             }
 
-            myArray[j] = curMin;           
+            myArray[j] = curMin; //wrte value of current min value to list.
 
-        }
-
-        public int[] GetAllPositionsOfValue(int item)
-        {
-            int[] v = list.Select((b, i) => b == item ? i : -1).Where(i => i != -1).ToArray();
-
-            return v;
-        }
-               
-
-        public int[] GetList()
-        {
-            return list;
         }
 
         public int Min()
@@ -161,7 +118,7 @@ namespace OrderUnorderList
 
             //loop through list and set lowest
 
-            for(int i = 0; i<next; i++)
+            for (int i = 0; i < next; i++)
             {
                 if (list[i] < result) //If lower than current assign as lowest
                 {
@@ -197,6 +154,55 @@ namespace OrderUnorderList
 
             Console.WriteLine();
         }
+
+        public int GetLength()
+        {
+            return next;
+        }
+
+        public int GetValueAtLocation(int item)
+        {
+            return list[item];
+        }
+               
+        
+
+        public int GetFirstPositionOfValue(int item)
+        {
+            int result = Array.IndexOf(list, item);
+            
+            return result;
+
+        }
+
+        public void TrimList()
+        {
+            int[] trimmedList = new int[next];
+
+            for (int i=0; i<next; i++)
+            {
+                trimmedList[i] = list[i];
+            }
+
+            list = trimmedList;
+        }
+              
+      
+
+        public int[] GetAllPositionsOfValue(int item)
+        {
+            int[] v = list.Select((b, i) => b == item ? i : -1).Where(i => i != -1).ToArray();
+
+            return v;
+        }
+               
+
+        public int[] GetList()
+        {
+            return list;
+        }
+
+       
 
         public void PrintListInformation()
         {
