@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OrderUnorderList
 {
@@ -15,13 +17,13 @@ namespace OrderUnorderList
         }
 
 
-        public void Insert(ref int item)
+        public void Insert(int item)
         {
             list[next] = item;
             next++;
         }
 
-        public void InsertValues(ref int[] items)
+        public void InsertValues(int[] items)
         {
             for(int i=0; i<items.Length; i++)
             {
@@ -31,7 +33,7 @@ namespace OrderUnorderList
         
         }
     
-        public void Remove(ref int item)
+        public void Remove(int item)
         {
             if (next == 0)
             {
@@ -51,19 +53,106 @@ namespace OrderUnorderList
             }
         
         }
-               
-        public void RemoveAll(ref int item)
+
+        public int GetLength()
         {
-            for(int i=0; i<next; i++)
+            return next;
+        }
+
+        public int GetValueAtLocation(int item)
+        {
+            return list[item];
+        }
+               
+        public int[] RemoveAll(int selectedItem)
+        {
+            bool cont = true;
+            List<int> removeList = new List<int>();
+            while (cont)
             {
-                if (item.Equals(list[i]))
+                int item = GetFirstPositionOfValue(selectedItem);
+                list[item] = list[next - 1]; //Replace item with last item
+                list[next - 1] = 0;    //Remove last item                    
+                removeList.Add(item);
+                next--;             
+
+                if(Array.IndexOf(list,selectedItem) == -1)
                 {
-                    list[i] = list[next - 1]; //Replace item with last item
-                    list[next - 1] = 0;    //Remove last item                    
-                    next--;
+                    cont = false;
                 }
             }
 
+            return removeList.ToArray();
+        }
+
+        public int GetFirstPositionOfValue(int item)
+        {
+            int result = Array.IndexOf(list, item);
+            
+            return result;
+
+        }
+
+        public void TrimList()
+        {
+            int[] trimmedList = new int[next];
+
+            for (int i=0; i<next; i++)
+            {
+                trimmedList[i] = list[i];
+            }
+
+            list = trimmedList;
+        }
+
+        public void sort()
+        {
+            TrimList();
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                int j = i;
+                int curMin = list[i];
+
+                while (j > 0 && list[j - 1] > curMin)
+                {
+                    list[j] = list[j - 1];
+                    j--;
+                }
+
+                list[j] = curMin;
+            }
+
+        }
+
+        public void InsertionSortDemo(int sortPosition)
+        {
+            int[] myArray = list;
+
+            int j = sortPosition;
+            int curMin = myArray[sortPosition];
+
+            while (j > 0 && myArray[j - 1] > curMin)
+            {
+                myArray[j] = myArray[j - 1];
+                j--;
+            }
+
+            myArray[j] = curMin;           
+
+        }
+
+        public int[] GetAllPositionsOfValue(int item)
+        {
+            int[] v = list.Select((b, i) => b == item ? i : -1).Where(i => i != -1).ToArray();
+
+            return v;
+        }
+               
+
+        public int[] GetList()
+        {
+            return list;
         }
 
         public int Min()
@@ -74,7 +163,7 @@ namespace OrderUnorderList
 
             for(int i = 0; i<next; i++)
             {
-                if (list[i] < result)
+                if (list[i] < result) //If lower than current assign as lowest
                 {
                     result = list[i];
                 }
@@ -88,10 +177,9 @@ namespace OrderUnorderList
             int result = list[0];
 
             //loop through list and set lowest
-
             for (int i = 0; i < next; i++)
             {
-                if (list[i] > result)
+                if (list[i] > result)//If greater than current assign as highest
                 {
                     result = list[i];
                 }
@@ -100,13 +188,11 @@ namespace OrderUnorderList
             return result;
         }
 
-        public void Print()
+        public void Print()  //Print Array List to screen
         {
-            Console.Write("LIST: ");
-
             for (int i = 0; i < next; i++)
             {
-                Console.Write(" " + list[i]);
+                Console.Write(" " + list[i]);  //Modified to print accross screen
             }
 
             Console.WriteLine();
